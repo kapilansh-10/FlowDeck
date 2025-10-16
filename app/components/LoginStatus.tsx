@@ -15,20 +15,33 @@ export default function LoginStatus() {
     // if session exists that means user is logged in
     if(session) {
         return (
-            <div>
-                <p>Sign in as</p><strong>{session.user?.email}</strong>
-                <button onClick={() => signOut()}>Sign out</button>
+            <div className="flex items-center gap-4">
+                <p className="text-sm text-neutral-400">{session.user?.email}</p>
+                <button 
+                    onClick={() => signOut()}
+                    className="px-3 py-1 text-sm bg-neutral-800 text-white rounded-md hover:bg-neutral-700"
+                >
+                    Sign out
+                </button>
             </div>
         )
     }
 
     // if no session the user is not logged in
     return (
-        <div>
-            <p>Not signed in</p>
-            <button onClick={() => signIn("google")}>Sign in with Google</button>
-            <br />
-            <button onClick={() => signIn("github")}>Sign in with Github</button>
+        <div className="flex items-center gap-4">
+            <button 
+                onClick={() => signIn("google", { callbackUrl: "/dashboard" })}
+                className="px-3 py-1 text-sm bg-neutral-100 text-black rounded-md hover:bg-neutral-300"
+            >
+                Sign in with Google
+            </button>
+            <button 
+                onClick={() => signIn("github")}
+                className="px-3 py-1 text-sm bg-neutral-800 text-white rounded-md hover:bg-neutral-700"
+            >
+                Sign in with Github
+            </button>
         </div>
     )
 }
